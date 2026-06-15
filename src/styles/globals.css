@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts loaded via next/font in layout.tsx ── */
+
+@layer base {
+  :root {
+    --gold: #b89a6a;
+    --gold-lt: #d4b98a;
+    --gold-dk: #8a7248;
+    --ink:  #0e0c0a;
+    --ink2: #1e1a16;
+  }
+
+  html {
+    scroll-behavior: auto; /* Lenis handles scroll */
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-ink text-white;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  @media (max-width: 900px) {
+    body { cursor: auto; }
+    a, button { cursor: pointer; }
+  }
+
+  * { box-sizing: border-box; }
+  a { text-decoration: none; color: inherit; }
+  button { border: none; background: none; }
+  img { display: block; }
+}
+
+@layer components {
+  /* ── Typography ── */
+  .font-serif-display {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+  }
+
+  .label-text {
+    @apply text-[10px] font-medium tracking-[0.22em] uppercase;
+    color: var(--gold);
+  }
+
+  /* ── Grain overlay ── */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    pointer-events: none;
+    opacity: 0.032;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    animation: grain 0.5s steps(1) infinite;
+  }
+
+  /* ── Gold gradient button ── */
+  .btn-gold {
+    @apply inline-flex items-center gap-2.5 px-8 rounded-full font-medium text-ink;
+    height: 52px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    background: var(--gold);
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-gold::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .btn-gold:hover {
+    background: var(--gold-lt);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 48px rgba(184,154,106,0.4);
+  }
+  .btn-gold:hover::before { opacity: 1; }
+
+  /* ── Outline button ── */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-7 rounded-full text-white/70;
+    height: 52px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: border-color 0.3s, color 0.3s, transform 0.3s;
+  }
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  /* ── Dark gold button ── */
+  .btn-dark {
+    @apply inline-flex items-center gap-2.5 px-8 rounded-full font-medium text-ink;
+    height: 52px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    background: var(--gold);
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .btn-dark:hover {
+    background: var(--gold-lt);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 44px rgba(184,154,106,0.4);
+  }
+
+  /* ── Ghost gold button ── */
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-8 rounded-full text-white/60;
+    height: 54px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: border-color 0.3s, color 0.3s, transform 0.3s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* ── Glass card ── */
+  .glass-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(24px) saturate(1.2);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ── Gold eyeline ── */
+  .eyeline {
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* ── Section heading ── */
+  .section-h {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-weight: 300;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── BA divider ── */
+  .ba-divider {
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 1px;
+    background: rgba(255,255,255,0.12);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ba-divider::after {
+    content: '↔';
+    position: absolute;
+    background: rgba(14,12,10,0.9);
+    backdrop-filter: blur(10px);
+    color: var(--gold);
+    font-size: 11px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(184,154,106,0.3);
+  }
+}
+
+/* ── Lenis smooth scroll wrapper ── */
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto; }
+
+/* ── Marquee track ── */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 24s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── Test track ── */
+.test-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.test-track:hover { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.2s !important;
+  }
+  .grain-overlay { display: none; }
+}
