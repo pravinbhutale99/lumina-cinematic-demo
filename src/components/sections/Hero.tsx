@@ -64,11 +64,11 @@ export default function Hero() {
           above the glass cards column.
       ══════════════════════════════ */}
       <motion.div
-        className="absolute z-[8] pointer-events-none
-                   right-[clamp(24px,7vw,120px)]
-                   top-1/2 -translate-y-[58%]
-                   max-lg:right-6 max-lg:top-[18%] max-lg:translate-y-0
-                   max-md:opacity-30"
+        className="absolute z-[20] pointer-events-none
+                   right-[clamp(16px,6vw,100px)]
+                   top-1/2 -translate-y-[52%]
+                   max-lg:right-4 max-lg:top-[14%] max-lg:translate-y-0
+                   max-md:opacity-25"
         style={{ y: botY }}
       >
         {/* Soft radial backdrop behind bot */}
